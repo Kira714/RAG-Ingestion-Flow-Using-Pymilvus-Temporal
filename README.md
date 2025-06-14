@@ -9,8 +9,8 @@ This project implements a distributed, asynchronous document ingestion pipeline 
 
 - Temporal Workflow that handles document ingestion end-to-end
 - Activities for:
-  - Downloading PDFs
-  - Parsing PDFs into chunks using `unstructured`
+  - Downloading PDFs or any other supported type file
+  - Parsing file into chunks using `unstructured`
   - Generating embeddings using **Cohere API**
   - Inserting data into **Milvus 2.0.2** vector database
 - Asynchronous activity execution using `asyncio` and `ThreadPoolExecutor`
@@ -113,7 +113,7 @@ python client.py
 ```
 
 This will:
-- Download a sample PDF
+- Download a sample file
 - Parse it into chunks
 - Generate embeddings via Cohere
 - Insert the embeddings into Milvus
@@ -184,7 +184,23 @@ file_id = "file_lime_001"
 file_url = "https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf"
 ```
 
-You can change this to any valid public PDF URL.
+You can change this to any valid public file URL.
+
+## ✅ File Types Supported
+
+This project supports extracting and processing content from a variety of document types using the `unstructured` library.
+
+| File Type | Description              |
+|-----------|--------------------------|
+| `.pdf`    | PDF Documents            |
+| `.docx`   | Word Documents (DOCX)    |
+| `.pptx`   | PowerPoint Presentations |
+| `.txt`    | Plain Text Files         |
+| `.html`   | HTML Files (Web Pages)   |
+| `.eml`    | Email Files              |
+| `.md`     | Markdown Files           |
+
+> ⚙️ Powered by [`unstructured`](https://github.com/Unstructured-IO/unstructured)
 
 ---
 
