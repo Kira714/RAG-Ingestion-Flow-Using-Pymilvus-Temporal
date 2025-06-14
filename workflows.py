@@ -14,21 +14,21 @@ class DocumentIngestionWorkflow:
         )
 
         path = await workflow.execute_activity(
-            "fetch_document",
+            "fetch_document", # taking the file from client
             args=[file_url, file_id],
             schedule_to_close_timeout=timedelta(seconds=60),
             retry_policy=retry_policy
         )
 
         chunks = await workflow.execute_activity(
-            "parse_document",
+            "parse_document", # unstructured for parsing file
             args=[path],
             schedule_to_close_timeout=timedelta(seconds=60),
             retry_policy=retry_policy
         )
 
         chunk_embeddings = await workflow.execute_activity(
-            "generate_embeddings",
+            "generate_embeddings", # generate embeddings for each chunk
             args=[chunks],
             schedule_to_close_timeout=timedelta(seconds=120),
             retry_policy=retry_policy

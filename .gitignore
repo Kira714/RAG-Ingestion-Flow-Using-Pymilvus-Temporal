@@ -35,5 +35,4 @@ Thumbs.db
 
 
 # Utility/debug scripts not to be committed
-drop_collection.py
 Dockerfile
