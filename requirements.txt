@@ -1,0 +1,5 @@
+temporalio
+aiohttp
+openai
+unstructured
+pymilvus==2.0.2
