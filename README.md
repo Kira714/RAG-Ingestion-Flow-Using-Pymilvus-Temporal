@@ -160,7 +160,7 @@ This will:
 
 ### Temporal Workflow UI
 
-Once executed, visit [http://localhost:8233](http://localhost:8233) and view:
+Once executed, visit [http://localhost:8080](http://localhost:8080) and view:
 - Workflow status: `COMPLETED`
 - Output: Sample embeddings + metadata
 
