@@ -4,7 +4,7 @@ import uuid
 import tempfile
 import cohere
 from typing import List, Dict
-from unstructured.partition.pdf import partition_pdf
+from unstructured.partition.auto import partition
 from pymilvus import connections, Collection, utility, DataType, CollectionSchema, FieldSchema,Milvus
 from temporalio import activity
 from dotenv import load_dotenv
@@ -31,7 +31,7 @@ collection_name = "doc_chunks"
 if not utility.has_collection(collection_name):
     fields = [
         FieldSchema(name="chunk_id", dtype=DataType.INT64, is_primary=True, auto_id=True),
-        FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=4096),  # ✅ Correct dimension
+        FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=4096),  
     ]
     schema = CollectionSchema(fields, description="Document chunks with embeddings")
     Collection(name=collection_name, schema=schema)
@@ -67,7 +67,7 @@ async def fetch_document(file_url: str, file_id: str) -> str:
 @activity.defn
 def parse_document(filepath: str) -> List[str]:
     try:
-        elements = partition_pdf(filename=filepath)
+        elements = partition(filename=filepath)
         return [el.text.strip() for el in elements if el.text and el.text.strip()]
     except Exception as e:
         raise Exception(f"Parsing failed: {str(e)}")
